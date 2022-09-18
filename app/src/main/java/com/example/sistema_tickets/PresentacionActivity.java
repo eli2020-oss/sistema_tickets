@@ -26,7 +26,7 @@ public class PresentacionActivity extends AppCompatActivity {
                 SharedPreferences preferences=getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
                 boolean session=preferences.getBoolean("session",false);
                 if(session){
-                    Intent intent= new Intent(getApplicationContext(),Principal.class);
+                    Intent intent= new Intent(getApplicationContext(),bienvenidaActivity.class);
                     startActivity(intent);
                     finish();
                 }else

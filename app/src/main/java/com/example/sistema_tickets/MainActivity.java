@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 password= edtPassword.getText().toString();
                 if(!usuario.isEmpty() && !password.isEmpty())
                 {
-                    validarUsuario("http://192.168.0.13/proyect/base/pages/forms/movil/validar_usuario.php");
+                    validarUsuario("http://192.168.0.15/proyect/base/pages/forms/movil/validar_usuario.php");
                 }else
                 {
                     Toast.makeText(MainActivity.this,"No se permite campos vacios", Toast.LENGTH_LONG).show();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if(!response.isEmpty()){
                     guardarpreferencias();
-                    Intent intent= new Intent(getApplicationContext(),Principal.class);
+                    Intent intent= new Intent(getApplicationContext(),bienvenidaActivity.class);
                     startActivity(intent);
                     finish();
                 }else
