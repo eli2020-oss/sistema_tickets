@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class adapter extends ArrayAdapter<ticket> {
 
     Context context;
     List<ticket> arrayticket;
+    TextView txtid,txtnombre,txtfecha;
     public adapter(@NonNull Context context, List<ticket>arrayticket) {
         super(context, R.layout.list_tickt,arrayticket);
         this.context=context;
@@ -25,12 +27,17 @@ public class adapter extends ArrayAdapter<ticket> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_tickt,null,true);
-        TextView txtid = view.findViewById(R.id.txtid);
-        TextView txtnombre = view.findViewById(R.id.txtnombre);
+        //ticket ticket = getItem(position);
+       // RecyclerView.ViewHolder viewHolder; // view lookup cache stored in tag
+       // final View result;
+         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_tickt,null,false);
+        txtid = view.findViewById(R.id.txtid);
+         txtnombre = view.findViewById(R.id.txtnombre);
+       txtfecha = view.findViewById(R.id.txtfecha);
 
         txtid.setText(arrayticket.get(position).getId());
         txtnombre.setText(arrayticket.get(position).getNombre());
+        txtfecha.setText(arrayticket.get(position).getFecha());
         return view;
     }
 }

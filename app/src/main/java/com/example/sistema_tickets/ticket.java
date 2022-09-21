@@ -4,6 +4,12 @@ public class ticket
 {
     String id,nombre,fecha;
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+
     public ticket() {
     }
 

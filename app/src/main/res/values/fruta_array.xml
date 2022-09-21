@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fruta_array">
+        <item>Manzana</item>
+        <item>Pera</item>
+        <item>Uva</item>
+
+    </string-array>
+</resources>

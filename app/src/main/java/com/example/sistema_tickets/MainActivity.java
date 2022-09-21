@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 password= edtPassword.getText().toString();
                 if(!usuario.isEmpty() && !password.isEmpty())
                 {
-                    validarUsuario("http://192.168.0.15/proyect/base/pages/forms/movil/validar_usuario.php");
+                    validarUsuario("http://192.168.1.205/proyect/base/pages/forms/movil/validar_usuario.php");
                 }else
                 {
                     Toast.makeText(MainActivity.this,"No se permite campos vacios", Toast.LENGTH_LONG).show();
