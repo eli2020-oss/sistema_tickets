@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,11 +65,14 @@ public class New_ticket extends AppCompatActivity {
       // cate.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,lista));
         codigo.setVisibility(codigo.INVISIBLE);
 
-        validarUsuario("http://192.168.0.10/proyect/base/pages/forms/movil/buscar_user.php?email='" + email + "'");
+        //validarUsuario("http://192.168.0.10/proyect/base/pages/forms/movil/buscar_user.php?email='" + email + "'");
+        validarUsuario("http://192.168.1.205/proyect/base/pages/forms/movil/buscar_user.php?email='" + email + "'");
 
         localizacion();
         llenarSpinner("http://192.168.0.10/proyect/base/pages/forms/movil/spinner_categoria.php");
+       // llenarSpinner("http://192.168.1.205/proyect/base/pages/forms/movil/spinner_categoria.php");
         llenarfilial("http://192.168.0.10/proyect/base/pages/forms/movil/spinner_filial.php");
+       // llenarfilial("http://192.168.1.205/proyect/base/pages/forms/movil/spinner_filial.php");
         btnenviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,12 +209,22 @@ public class New_ticket extends AppCompatActivity {
                   Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION
           },1000);
         }
-        ubicacion = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location cog = ubicacion.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(ubicacion!=null) {
-            Log.d("Latitud", String.valueOf(cog.getLatitude()));
-            Log.d("Longitud", String.valueOf(cog.getLongitude()));
+        try {
+            ubicacion = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+          Location cog = ubicacion.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+             if(ubicacion!=null) {
+                Log.d("Latitud", String.valueOf(cog.getLatitude()));
+                 Log.d("Longitud", String.valueOf(cog.getLongitude()));
+             }
+        }catch (Exception e) {
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
+       // ubicacion = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+       /// Location cog = ubicacion.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+       /// if(ubicacion!=null) {
+       ///     Log.d("Latitud", String.valueOf(cog.getLatitude()));
+      //      Log.d("Longitud", String.valueOf(cog.getLongitude()));
+      //  }
 
     }
 

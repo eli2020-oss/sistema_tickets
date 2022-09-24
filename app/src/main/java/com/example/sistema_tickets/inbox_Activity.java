@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -49,12 +50,24 @@ public class inbox_Activity extends AppCompatActivity {
 
         preferences = getSharedPreferences("preferenciasLogin",MODE_PRIVATE);
         String email = preferences.getString("usuario","");
-      //  Toast.makeText(getApplicationContext(), "http://192.168.0.15/proyect/base/pages/forms/movil/buscar_user.php?email='"+email+"'", Toast.LENGTH_LONG).show();
-        ListarDatos("http://192.168.0.10/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
+      //
+      ListarDatos("http://192.168.0.10/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
+      //  ListarDatos("http://192.168.1.205/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
+      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              //Toast.makeText(getApplicationContext(), listView.getId()+"", Toast.LENGTH_LONG).show();
+              Bundle enviaDatos = new Bundle();
+              enviaDatos.putString("idticket",listView.getId()+"");
+             Intent intent = new Intent(inbox_Activity.this, chat_Activity.class);
+             intent.putExtras(enviaDatos);
+             startActivity(intent);
+          }
+      });
     }
 
     private void ListarDatos(String URL) {
-         //Toast.makeText(getApplicationContext(), "entra 1", Toast.LENGTH_LONG).show();
+        // Toast.makeText(getApplicationContext(), URL, Toast.LENGTH_LONG).show();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             // Toast.makeText(getApplicationContext(), "entra 1", Toast.LENGTH_LONG).show();
             @Override
@@ -69,7 +82,7 @@ public class inbox_Activity extends AppCompatActivity {
                        String id= jsonObject.getString("ids");
                      String nombre= jsonObject.getString("nombre");
                       String fecha= jsonObject.getString("fecha");
-
+                        ///Toast.makeText(inbox_Activity.this, fecha, Toast.LENGTH_SHORT).show();
                         ticket=new ticket(id,nombre,fecha);
                         ticketsArrayList.add(ticket);
                        ArrayAdapter<ticket> a = new ArrayAdapter<ticket>(inbox_Activity.this,  android.R.layout.simple_list_item_1,ticketsArrayList);
