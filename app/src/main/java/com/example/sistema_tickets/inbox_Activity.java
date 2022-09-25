@@ -56,9 +56,11 @@ public class inbox_Activity extends AppCompatActivity {
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              //Toast.makeText(getApplicationContext(), listView.getId()+"", Toast.LENGTH_LONG).show();
+              int numEntero = Integer.parseInt(listView.getItemIdAtPosition(position)+"");
+            // Toast.makeText(getApplicationContext(),ticketsArrayList.get(numEntero).getId()+"", Toast.LENGTH_LONG).show();
+
               Bundle enviaDatos = new Bundle();
-              enviaDatos.putString("idticket",listView.getId()+"");
+              enviaDatos.putString("idticket",ticketsArrayList.get(numEntero).getId()+"");
              Intent intent = new Intent(inbox_Activity.this, chat_Activity.class);
              intent.putExtras(enviaDatos);
              startActivity(intent);
@@ -82,7 +84,7 @@ public class inbox_Activity extends AppCompatActivity {
                        String id= jsonObject.getString("ids");
                      String nombre= jsonObject.getString("nombre");
                       String fecha= jsonObject.getString("fecha");
-                        ///Toast.makeText(inbox_Activity.this, fecha, Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(inbox_Activity.this, id, Toast.LENGTH_SHORT).show();
                         ticket=new ticket(id,nombre,fecha);
                         ticketsArrayList.add(ticket);
                        ArrayAdapter<ticket> a = new ArrayAdapter<ticket>(inbox_Activity.this,  android.R.layout.simple_list_item_1,ticketsArrayList);
