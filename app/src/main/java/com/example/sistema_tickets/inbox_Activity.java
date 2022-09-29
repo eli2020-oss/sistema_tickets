@@ -40,6 +40,7 @@ public class inbox_Activity extends AppCompatActivity {
     ticket ticket;
     SharedPreferences preferences;
     RequestQueue requestQueue;
+    conexion con= new conexion();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +51,9 @@ public class inbox_Activity extends AppCompatActivity {
 
         preferences = getSharedPreferences("preferenciasLogin",MODE_PRIVATE);
         String email = preferences.getString("usuario","");
-      //
-      ListarDatos("http://192.168.0.10/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
-      //  ListarDatos("http://192.168.1.205/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
+
+      ListarDatos(con.ruta+"bandeja_movil.php?email='"+email+"'");
+       // ListarDatos("http://192.168.1.205/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

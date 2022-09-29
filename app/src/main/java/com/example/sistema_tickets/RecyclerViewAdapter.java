@@ -55,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
        void bindData(final Message item )
        {
-           user_email.setText(item.getD_user());
+           user_email.setText(item.getTickes_id());
            user_menssage.setText(item.d_descrip);
            user_menssage_date_time.setText(item.fecha);
        }

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText edtUsuario,edtPassword;
     Button btnLogin;
     String usuario,password;
+    conexion con= new conexion();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 password= edtPassword.getText().toString();
                 if(!usuario.isEmpty() && !password.isEmpty())
                 {
-                    validarUsuario("http://192.168.0.10/proyect/base/pages/forms/movil/validar_usuario.php");
+                    validarUsuario(con.ruta+"validar_usuario.php");
                 }else
                 {
                     Toast.makeText(MainActivity.this,"No se permite campos vacios", Toast.LENGTH_LONG).show();

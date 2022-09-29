@@ -97,7 +97,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{}";
+        return d_descrip+""+fecha;
     }
 
 

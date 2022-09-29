@@ -6,7 +6,7 @@ public class ticket
 
     @Override
     public String toString() {
-        return nombre+" "+fecha;
+        return nombre+"/ "+fecha;
     }
 
 
