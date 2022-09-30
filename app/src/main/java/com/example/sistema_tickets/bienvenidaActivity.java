@@ -108,6 +108,6 @@ public class bienvenidaActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("codigo",id);
         editor.commit();
-        Toast.makeText(bienvenidaActivity.this, "dentro "+id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(bienvenidaActivity.this, "dentro "+id, Toast.LENGTH_SHORT).show();
     }
 }
