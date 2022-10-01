@@ -295,7 +295,7 @@ public class New_ticket extends AppCompatActivity implements LocationListener {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Ingreso mal ",Toast.LENGTH_LONG).show();
             }
         }){
             @Nullable
