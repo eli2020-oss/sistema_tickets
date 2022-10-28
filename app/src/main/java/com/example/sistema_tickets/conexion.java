@@ -11,7 +11,7 @@ public class conexion {
     public conexion()
     {
         //ruta="http://192.168.1.205/proyect/base/pages/forms/movil/";
-        ruta="http://192.168.0.10/proyect/base/pages/forms/movil/";
+        ruta="http://192.168.0.14/proyect/base/pages/forms/movil/";
     }
 
 }

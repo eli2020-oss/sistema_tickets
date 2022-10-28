@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class chat_Activity extends AppCompatActivity {
     TextInputEditText mensaje;
     FloatingActionButton enviar;
     String codigo;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,7 @@ public class chat_Activity extends AppCompatActivity {
         mensaje = findViewById(R.id.mensaje);
         enviar =findViewById(R.id.fab_send);
         // items = new ArrayList<Message>();
+        swipeRefreshLayout =findViewById(R.id.swipeRefreshLayout);
         preferences = getSharedPreferences("preferenciasid",MODE_PRIVATE);
         codigo = preferences.getString("codigo","");
 
@@ -68,13 +71,34 @@ public class chat_Activity extends AppCompatActivity {
                //
                 if(mensaje.getText().toString().isEmpty())
                 {
-                    Toast.makeText(chat_Activity.this,"Vacio",Toast.LENGTH_LONG).show();
+                    Toast.makeText(chat_Activity.this,"MENSAJE EN BLANCO",Toast.LENGTH_LONG).show();
                 }else
                 {
-                   // Toast.makeText(chat_Activity.this,mensaje.getText().toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(chat_Activity.this,mensaje.getText().toString(),Toast.LENGTH_LONG).show();
                     ejecutarServicio(con.ruta+"envio_mensaje.php");
+                   //
+                 //   loadItems(con.ruta+"obtenerMensaje.php?tickes_id='"+info+"'");
                 }
                  //
+                 //mensaje.setText("");
+             }
+         });
+         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+             @Override
+             public void onRefresh() {
+                 if(mensaje.getText().toString().isEmpty())
+                 {
+                 Toast.makeText(chat_Activity.this,"MENSAJE EN BLANCO",Toast.LENGTH_LONG).show();
+             }else
+              {
+                  Message envio= new Message("",mensaje.getText().toString(),"Ahora");
+                  elements.add(envio);
+                  listAdapter = new RecyclerViewAdapter(elements,chat_Activity.this);
+                  recyclerView.setAdapter(listAdapter);
+              }
+                 mensaje.setText("");
+
+
              }
          });
     }

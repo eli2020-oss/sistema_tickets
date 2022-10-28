@@ -51,8 +51,10 @@ public class inbox_Activity extends AppCompatActivity {
 
         preferences = getSharedPreferences("preferenciasLogin",MODE_PRIVATE);
         String email = preferences.getString("usuario","");
+       // Toast.makeText(getApplicationContext(),ticketsArrayList.get(numEntero).getId()+"", Toast.LENGTH_LONG).show();
 
-      ListarDatos(con.ruta+"bandeja_movil.php?email='"+email+"'");
+      //  ListarDatos(con.ruta+"bandeja_movil.php?email='"+email+"'");
+        ListarDatos(con.ruta+"bandeja_movil.php?email=tv2392542@gmail.com");
        // ListarDatos("http://192.168.1.205/proyect/base/pages/forms/movil/bandeja_movil.php?email='"+email+"'");
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
@@ -70,9 +72,9 @@ public class inbox_Activity extends AppCompatActivity {
     }
 
     private void ListarDatos(String URL) {
-        // Toast.makeText(getApplicationContext(), URL, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getApplicationContext(), URL, Toast.LENGTH_LONG).show();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
-            // Toast.makeText(getApplicationContext(), "entra 1", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "entra 1", Toast.LENGTH_LONG).show();
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject jsonObject = null;

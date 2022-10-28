@@ -3,6 +3,7 @@ package com.example.sistema_tickets;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -72,7 +73,8 @@ public class New_ticket extends AppCompatActivity implements LocationListener {
         codigo = findViewById(R.id.codigo);
         titulo= findViewById(R.id.titulo);
         mensaje = findViewById(R.id.mensaje);
-
+        latitud= "37.421998333333335";
+        longitud= "-122.08400000000002";
         fili = (Spinner) findViewById(R.id.Filial);
         cate = (Spinner) findViewById(R.id.cate);
         btnenviar = findViewById(R.id.btnEnviar);
@@ -86,11 +88,11 @@ public class New_ticket extends AppCompatActivity implements LocationListener {
 
         // cate.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,lista));
         codigo.setVisibility(codigo.INVISIBLE);
-
+       id.setEnabled(false);
 
         validarUsuario(con.ruta+"buscar_user.php?email='" + email + "'");
 
-        localizacion();
+        //localizacion();
 
          llenarSpinner(con.ruta+"spinner_categoria.php");
 
@@ -105,9 +107,21 @@ public class New_ticket extends AppCompatActivity implements LocationListener {
 
                     c = lista.get(posc);
                     f = listfilial.get(posf);
-                    ejecutarServicio(con.ruta+"insert_ticket.php");
-                  //  Toast.makeText(getApplicationContext(), c.getCate_id(), Toast.LENGTH_LONG).show();
-
+                    if(titulo.getText().toString().isEmpty())
+                    {
+                        Toast.makeText(New_ticket.this,"Asignar Titulo",Toast.LENGTH_LONG).show();
+                    }
+                    else if (mensaje.getText().toString().isEmpty())
+                    {
+                        Toast.makeText(New_ticket.this,"MENSAJE EN BLANCO",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        ejecutarServicio(con.ruta + "insert_ticket.php");
+                        //  Toast.makeText(getApplicationContext(), c.getCate_id(), Toast.LENGTH_LONG).show();
+                     Intent intent = new Intent(New_ticket.this, inbox_Activity.class);
+                       //intent.putExtras(enviaDatos);
+                       startActivity(intent);
+                    }
                 }
             }
         });
@@ -295,7 +309,7 @@ public class New_ticket extends AppCompatActivity implements LocationListener {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Ingreso mal ",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"La operacio no se realizo con exito ",Toast.LENGTH_LONG).show();
             }
         }){
             @Nullable
